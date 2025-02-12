@@ -13,6 +13,8 @@ import icons from "@/constants/icons";
 import { settings } from "@/constants/data";
 import EditProfileModal from "@/components/ProfileModel";
 import { useState } from "react";
+import supabase from "@/supabase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface SettingsItemProp {
   icon: ImageSourcePropType;
@@ -48,6 +50,8 @@ const Profile = () => {
 
   const handleLogout = async () => {
       Alert.alert("Success", "Logged out successfully");
+      await AsyncStorage.setItem("userData", "");
+      supabase.auth.signOut();
   };
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -95,7 +99,6 @@ const Profile = () => {
             onPress={handleLogout}
           />
         </View>
-        
       </ScrollView>
     </SafeAreaView>
   );

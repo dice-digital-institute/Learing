@@ -12,27 +12,6 @@ export default function PreloadingVideoPlayerScreen() {
   const [getDimensions, setDimensions] = useState({});
   const videoRef = useRef<VideoView>(null);
 
-  // const enterLandscape = async () => {
-  //   await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
-  // };
-
-  // // Function to restore the screen to portrait mode
-  // const exitPortrait = async () => {
-  //   await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
-  // };
-
-  // useEffect(() => {
-  //   // Switch to landscape mode when the screen mounts
-  //   enterLandscape();
-  // }, [getDimensions]);
-
-  // useEffect(()=> {
-  //   return () => {
-  //     // Restore to portrait mode when the screen unmounts
-  //     exitPortrait();
-  //   };
-  // },[]);
-
   const player1 = useVideoPlayer(bigBuckBunnySource, player => {
     player.play();
   });
@@ -56,7 +35,7 @@ export default function PreloadingVideoPlayerScreen() {
           allowsFullscreen
           allowsPictureInPicture
         />
-        ) : (<></>)}
+        ) : (<View></View>)}
     </SafeAreaView>
   );
 }

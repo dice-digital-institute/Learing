@@ -23,14 +23,12 @@ const Home = () => {
       <View className="px-4 pb-2">
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row">
-          <Link href="/sign-in" asChild>
            <TouchableOpacity>
             <Image
               source={{ uri: "https://randomuser.me/api/portraits/men/1.jpg" }}
               className="w-16 h-16 rounded-full"
             />
            </TouchableOpacity>
-          </Link>
             <View className="flex flex-col items-start ml-2 justify-center">
               <Text className="text-sm font-rubik text-black-100">
                 Good Morning
