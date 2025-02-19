@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Learing",
-    "slug": "learing",
-    "owner": "hari96",
+    "name": "Dice Learing",
+    "slug": "dice-learning-app",
+    "owner": "vancifer",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "restate",
@@ -63,7 +63,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "46e21bbd-422f-43c3-bab6-0fb96732887d"
+        "projectId": "86092dec-c056-488a-8fe1-9d9ae9f14a55"
       }
     },
     "runtimeVersion": "1.0.0",
