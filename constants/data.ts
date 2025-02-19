@@ -82,7 +82,7 @@ export const lessons = [
     description: "Is the way that designers create sdv create way thatcc",
     duration: "6:21",
     progress: 100,
-    image: "https://picsum.photos/100/100?random=2", // Sample image
+    image: "https://picsum.photos/100/100?random=1", // Sample image
   },
   {
     id: 2,

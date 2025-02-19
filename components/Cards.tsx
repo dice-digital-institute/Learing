@@ -119,9 +119,9 @@ export const LessonCard = ({ title, description, duration, image, progress }: an
   );
 };
 
-export const ExploreCard = ({ title, description, cost, image, duration }: any) => {
+export const ExploreCard = ({ title, description, price, thumbnail_url, duration }: any, key:any) => {
   return (
-    <TouchableOpacity className="bg-white flex-row items-center rounded-xl p-4 h-02 shadow-md mx-4 my-2">
+    <TouchableOpacity key={key} className="bg-white flex-row items-center rounded-xl p-4 h-40 shadow-md mx-4 my-2">
       {/* Thumbnail with Play Button */}
       <View className="relative w-28 h-28 rounded-2xl overflow-hidden">
         <View className="flex flex-row items-center absolute px-2 top-2 right-2 bg-white/90 p-1 rounded-full z-50">
@@ -130,7 +130,7 @@ export const ExploreCard = ({ title, description, cost, image, duration }: any) 
             {4.3}
           </Text>
         </View>
-        <Image source={{ uri: image }} className="w-full h-full" />
+        <Image source={{ uri: thumbnail_url }} className="w-full h-full" />
       </View>
       {/* Text Section */}
       <View className="flex-1 ml-3 mr-1">
@@ -140,7 +140,7 @@ export const ExploreCard = ({ title, description, cost, image, duration }: any) 
       </View>
       {/* Duration */}
 
-      <Text className="text-gray-700 text-sm font-rubik-light">${cost}</Text>
+      <Text className="text-gray-700 text-sm font-rubik-light">${price}</Text>
     </TouchableOpacity>
   );
 };

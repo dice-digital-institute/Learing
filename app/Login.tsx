@@ -1,19 +1,38 @@
+import React, { useState } from "react";
 import images from "@/constants/images";
-import React from "react";
-import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Platform } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useAuthStore } from '../stores/authStore'
+import TostModal from "@/components/TostModal";
+import { useTostModal } from "@/stores/applicationStore";
 
+export default function LoginScreen() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState(false); 
+  const { setTostModal } = useTostModal();
+  const { login } = useAuthStore();
 
-export default function LoginScreen({email, setEmail, password, setPassword, handleLogin}:any) {
-
+  const LoginFun = async () => {
+    setLoading(true);
+    const response = await login(email, password);
+    if (response?.success) {
+      setTostModal(response.message, "success", true);
+      setLoading(false);
+    } else {
+      setTostModal(response.message, "error", true);
+      setLoading(false);
+    }
+  }
   return (
     <SafeAreaView className="flex bg-white px-6 justify-center">
+      <TostModal title={"login Successfull"} />
       <KeyboardAvoidingView behavior={"padding"} className="bg-white">
         {/* Image */}
         <View className="items-center">
           <Image
             source={images.onboarding} // Replace with your actual image
-            className="w-80 h-auto"
+            className="w-80 h-96"
             resizeMode="contain"
           />
         </View>
@@ -29,7 +48,7 @@ export default function LoginScreen({email, setEmail, password, setPassword, han
           onChangeText={setEmail}
           className="w-full border border-gray-300 rounded-md p-3 my-2"
           keyboardType="email-address"
-          textContentType="emailAddress" 
+          textContentType="emailAddress"
           autoComplete="email"
           importantForAutofill="yes"
           onFocus={() => setEmail(email)}
@@ -48,8 +67,12 @@ export default function LoginScreen({email, setEmail, password, setPassword, han
           importantForAutofill="yes"
         />
         {/* Continue Button */}
-        <TouchableOpacity onPress={()=> handleLogin()} className="w-full bg-blue-600 py-3 rounded-lg mt-4">
-          <Text className="text-white text-center font-semibold text-lg">Continue</Text>
+        <TouchableOpacity disabled={loading} onPress={() => LoginFun()} className="w-full bg-blue-600 py-3 rounded-lg mt-4">
+          {loading ? (
+            <ActivityIndicator size="small" color="#fff" /> // ✅ Show spinner
+          ) : (
+            <Text className="text-white text-center font-semibold text-lg">Continue</Text>
+          )}
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </SafeAreaView>

@@ -25,7 +25,7 @@ const CourseScreen = () => {
         </Text>
       </View>
       <ScrollView className="bg-white flex-1 px-4">
-        <TouchableOpacity onPress={()=> {router.push("/screen")}}>
+        <TouchableOpacity onPress={()=> {router.push("/Videoscreen")}}>
           <View className="h-64 w-full bg-black rounded-md" />
         </TouchableOpacity>
         {/* Course Image Section */}

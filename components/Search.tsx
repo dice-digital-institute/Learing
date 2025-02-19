@@ -23,7 +23,7 @@ const Search = () => {
   return (
     <View className="flex-row items-center w-full">
       {/* Search Bar */}
-      <View className="h-16 shadow-lg shadow-black-100 flex-row items-center w-full flex-1 px-4 rounded-lg bg-accent-100 border border-primary-100 py-2">
+      <View className="h-16 flex-row items-center w-full flex-1 px-4 rounded-lg bg-accent-100 border-primary-100 py-2">
         <Image source={icons.search} className="size-5" />
         <TextInput
           value={search}
