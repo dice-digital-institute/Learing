@@ -26,7 +26,7 @@ export default function LoginScreen() {
   }
   return (
     <SafeAreaView className="flex bg-white px-6 justify-center">
-      <TostModal title={"login Successfull"} />
+      <TostModal />
       <KeyboardAvoidingView behavior={"padding"} className="bg-white">
         {/* Image */}
         <View className="items-center">

@@ -10,7 +10,7 @@ const CourseScreen = () => {
   const { id } = useLocalSearchParams();
 
   return (
-    <SafeAreaView className="flex h-full bg-white">
+    <View className="bg-white flex-1">
       <ScrollView className="bg-white flex-1 px-4">
         {/* Header */}
         <View className="flex-row items-center justify-between mb-4">
@@ -92,7 +92,7 @@ const CourseScreen = () => {
           <Text className="text-lg font-bold text-white">Start Cource</Text>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </View>
 
   );
 };

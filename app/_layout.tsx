@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Alert, View, ActivityIndicator } from "react-native";
+import { useEffect } from "react";
+import { View, ActivityIndicator } from "react-native";
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -8,9 +8,16 @@ import LoginScreen from "./Login"; // Ensure correct import path
 import { useAuthStore } from '../stores/authStore'
 import "./global.css";
 import { checkSession } from "@/helper";
+import StatusBarComponent from "@/components/StatusBarComponent"; // ✅ Import StatusBar wrapper
+import { SafeAreaView } from "react-native-safe-area-context";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import BottomSheetComponent from "@/components/BottomSheet";
+import Loader from "@/components/Loader";
+import ToastModal from "@/components/TostModal";
+
 
 export default function RootLayout() {
-  const { isAuthenticated, setIsAuthenticated, logout } = useAuthStore();
+  const { isAuthenticated, setIsAuthenticated, logout, user } = useAuthStore();
   // Load custom fonts
   const [fontsLoaded] = useFonts({
     "Rubik-Bold": require("../assets/fonts/Rubik-Bold.ttf"),
@@ -57,11 +64,23 @@ export default function RootLayout() {
     );
   }
 
-  return isAuthenticated && fontsLoaded ? (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(root)" /> {/* ✅ Ensures navigation works */}
-    </Stack>
-  ) : (
-    <LoginScreen />
+  return (
+    <SafeAreaView className="flex-1 h-full bg-white">
+      <StatusBarComponent />
+      <Loader overlay />
+      <ToastModal />
+      <GestureHandlerRootView>
+        {isAuthenticated ? (
+          <>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(root)" />
+          </Stack>
+          </>
+        ) : (
+          <LoginScreen />
+        )}
+        <BottomSheetComponent />
+      </GestureHandlerRootView>
+    </SafeAreaView>
   );
 }

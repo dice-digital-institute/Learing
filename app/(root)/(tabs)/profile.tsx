@@ -1,8 +1,6 @@
-import { useState } from "react";
 import {
   Image,
   ImageSourcePropType,
-  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -11,8 +9,9 @@ import {
 
 import icons from "@/constants/icons";
 import { settings } from "@/constants/data";
-import EditProfileModal from "@/components/ProfileModel";
-import { useAuthStore } from '../../../stores/authStore'
+import { useAuthStore } from '../../../stores/authStore';
+import { useBottomSheet } from '../../../stores/applicationStore';
+
 interface SettingsItemProp {
   icon: ImageSourcePropType;
   title: string;
@@ -44,34 +43,35 @@ const SettingsItem = ({
 );
 
 const Profile = () => {
-const { logout } = useAuthStore();
+  const { logout } = useAuthStore();
+  const { toggleSheet } = useBottomSheet();
+
   const handleLogout = async () => {
     await logout();
   };
-  const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <SafeAreaView className="h-full bg-white">
-      <EditProfileModal modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+    <View className="bg-white flex-1">
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerClassName="pb-32 px-7"
       >
         <View className="flex flex-row items-center justify-between">
           <Text className="text-xl font-rubik-bold">Profile</Text>
+
+          <TouchableOpacity className="" onPress={() => toggleSheet(true)}>
+            <Text className="text-xl font-rubik-bold text-primary-300">Edit</Text>
+          </TouchableOpacity>
         </View>
-      
+
         <View className="flex flex-row justify-center mt-5">
           <View className="flex flex-col items-center relative mt-5">
             <Image
-              source={{ uri: "https://picsum.photos/200" }}
-              className="size-44 relative rounded-full"
+              source={{ uri: "https://randomuser.me/api/portraits/men/1.jpg" }}
+              className="size-48 relative rounded-md"
             />
-            <TouchableOpacity className="absolute bottom-11 right-2" onPress={()=> setModalVisible(!modalVisible)}>
-              <Image source={icons.edit} className="size-9" />
-            </TouchableOpacity>
-
             <Text className="text-2xl font-rubik-bold mt-2">Hari</Text>
+            <Text className="text-lg font-rubik-bold mt-2">Front-end Dev</Text>
           </View>
         </View>
 
@@ -95,7 +95,7 @@ const { logout } = useAuthStore();
           />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

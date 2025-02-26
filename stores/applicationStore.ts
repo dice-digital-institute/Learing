@@ -12,6 +12,21 @@ interface ToastModalState {
   clearTostModal: () => void; // ✅ Function to reset modal state
 }
 
+interface BottomSheetState {
+  isSheetOpen: boolean;
+  toggleSheet: (open: boolean) => void;
+}
+
+interface LoadingState {
+  isLoading: boolean;
+  toggleisLoading: (open: boolean) => void;
+}
+
+interface UserDataAllState {
+  userAllDataVal: any;
+  setuserAllData: (val: any) => any;
+}
+
 export const useCourseData = create<CourseState>((set) => ({
     courseList: [],
     setCourseList: (data) => {
@@ -28,4 +43,21 @@ export const useTostModal = create<ToastModalState>((set) => ({
   clearTostModal: () => {
     set({ tostModal: null }); // ✅ Clears modal state
   },
+}));
+
+export const useBottomSheet = create<BottomSheetState>((set) => ({
+  isSheetOpen: false,
+  toggleSheet: (open) => set({ isSheetOpen: open }),
+}));
+
+export const useLoading = create<LoadingState>((set) => ({
+  isLoading: false,
+  toggleisLoading: (open) => set({ isLoading: open }),
+}));
+
+export const userAllData = create<UserDataAllState>((set) => ({
+  userAllDataVal: "",
+  setuserAllData: (val) => set({ 
+    userAllDataVal: val[0]
+  }),
 }));

@@ -11,5 +11,17 @@ export const getCourse = async (page:number) => {
     } catch (error) {
         console.log(error)
     }
+};
+
+export const getUserData = async (email:string) => {
+    try {
+        let { data: profiles, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('email_id', email)
+        return {profiles, error};
+    } catch (error) {
+        console.log(error)
+    }
 }
 

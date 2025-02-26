@@ -12,7 +12,7 @@ const CourseScreen = () => {
 
   const handleCardPress = () => { };
   return (
-    <SafeAreaView className="h-full">
+    <View className="bg-white flex-1">
       {/* Header */}
       <View className="flex-row items-center justify-between px-2 h-12 bg-white">
         {/* Back Button */}
@@ -50,7 +50,7 @@ const CourseScreen = () => {
         ))}
         <View className="pb-8" />
       </ScrollView>
-    </SafeAreaView>
+    </View>
 
   );
 };

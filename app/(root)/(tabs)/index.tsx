@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Image,
   ScrollView,
@@ -6,20 +7,34 @@ import {
   View,
 } from "react-native";
 import { router } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Link } from "expo-router";
 import icons from "@/constants/icons";
-
 import { Card } from "@/components/Cards";
-// import LineChartCom from "@/components/LineChart";
 import { cards } from "@/constants/data";
+import { useAuthStore } from "@/stores/authStore";
+import { getUserData } from "@/app/apiQuerys";
+import { useLoading, userAllData } from "@/stores/applicationStore";
+import { getGreeting } from "@/helper";
 
 const Home = () => {
-
+  
   const handleCardPress = (id: number) => router.push(`/properties/${id}`);
+  const {user} = useAuthStore();
+  const {toggleisLoading} = useLoading();
+  const {setuserAllData, userAllDataVal} =userAllData();
+  useEffect(()=>{
+    const getUserDataFun  =async () => {
+      await getUserData(user?.email).then((data)=> {
+        toggleisLoading(false)
+        setuserAllData(data?.profiles)
+      }).catch((err)=> {
+        toggleisLoading(false)
+      })
+    }
+    getUserDataFun();
+  },[]);
 
   return (
-    <SafeAreaView className="h-full bg-white">
+    <View className="bg-white flex-1">
       <View className="px-4 pb-2">
         <View className="flex flex-row items-center justify-between">
           <View className="flex flex-row">
@@ -31,10 +46,10 @@ const Home = () => {
            </TouchableOpacity>
             <View className="flex flex-col items-start ml-2 justify-center">
               <Text className="text-sm font-rubik text-black-100">
-                Good Morning
+                {getGreeting()}
               </Text>
-              <Text className="text-md font-rubik-medium text-black-300">
-                Hari
+              <Text className="text-md font-rubik-medium text-black-300 mt-2">
+                {userAllDataVal?.first_name}, {userAllDataVal?.last_name}
               </Text>
             </View>
           </View>
@@ -68,7 +83,7 @@ const Home = () => {
         })}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

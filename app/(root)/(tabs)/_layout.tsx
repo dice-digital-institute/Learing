@@ -17,7 +17,7 @@ const TabIcon = ({
       source={icon}
       tintColor={focused ? "#0061FF" : "#666876"}
       resizeMode="contain"
-      className="size-6"
+      className="size-8"
     />
     <Text
       className={`${
@@ -52,7 +52,7 @@ const TabsLayout = () => {
           title: "Home",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.home} title="Home" />
+            <TabIcon focused={focused} icon={icons.home} title="" />
           ),
         }}
       />
@@ -62,7 +62,7 @@ const TabsLayout = () => {
           title: "Learning",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.learning} title="Courses" />
+            <TabIcon focused={focused} icon={icons.learning} title="" />
           ),
         }}
       />
@@ -72,7 +72,7 @@ const TabsLayout = () => {
           title: "Profile",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={icons.person} title="Profile" />
+            <TabIcon focused={focused} icon={icons.person} title="" />
           ),
         }}
       />

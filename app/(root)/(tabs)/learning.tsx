@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ExploreCard } from "@/components/Cards";
-import { Text, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
+import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { getCourse } from "@/app/apiQuerys";
 import { useCourseData } from "../../../stores/applicationStore";
 
@@ -35,7 +35,7 @@ export default function Explore() {
   }, []);
 
   return (
-    <SafeAreaView className="bg-white flex-1">
+    <View className="bg-white flex-1">
     {/* ✅ Title */}
     <Text className="text-2xl font-rubik-bold text-black mt-4 mb-4 px-8">All Courses ({total})</Text>
   
@@ -51,6 +51,6 @@ export default function Explore() {
       ListFooterComponentStyle={{ paddingBottom: 30 }} // ✅ Ensures footer is visible
       ListEmptyComponent={!loading ? <Text className="text-center text-gray-500 mt-4">No courses available</Text> : null}
     />
-  </SafeAreaView>
+  </View>
   );
 }
